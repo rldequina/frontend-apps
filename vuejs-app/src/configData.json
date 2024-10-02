@@ -1,0 +1,15 @@
+{
+  "FIREBASE_URL": "https://demoquiz-practice6-7-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "FIREBASE_API_KEY": "AIzaSyB_ndpF6he3fo9H5KVUhRgNG2IidZ7cDRA",
+  "SIGNUP_URL": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
+  "LOGIN_URL": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=",
+  "ADDEDIT_FORMDATA": {
+    "name": "",
+    "sex": "Male",
+    "birthday": "",
+    "occupation": "",
+    "phone": "",
+    "email": "",
+    "interest": ""
+  }
+}
