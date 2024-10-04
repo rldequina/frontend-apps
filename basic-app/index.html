@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="icon" type="image/png" href="./resources/logo.png" />
+  <title>Basic App</title>
+</head>
+
+<body>
+  <header>
+    <img id="myPageLogo" src="./resources/logo.png" alt="myPage Logo" />
+    <h1 title="htmlDemoPage" style="font-size: 24px; color: black; margin: auto">
+      HTML, CSS, JavaScript Basic App
+    </h1>
+  </header>
+
+  <div class="carousel-container">
+    <div class="carousel-slide">
+      <img src="./resources/picture/bird.jpg" class="carousel-item" alt="First Slide" />
+      <img src="./resources/picture/lion.jpg" class="carousel-item" alt="Second Slide" />
+      <img src="./resources/picture/panda.jpg" class="carousel-item" alt="Third Slide" />
+      <img src="./resources/picture/squirell.jpg" alt="Last Slide" class="carousel-item" />
+    </div>
+  </div>
+  <div id="pagination" style="text-align: center">
+    <ol class="carousel-pagination">
+      <li class="bullet active-bullet" onclick="rollButton('bullet', 1)"></li>
+      <li class="bullet" onclick="rollButton('bullet', 2)"></li>
+      <li class="bullet" onclick="rollButton('bullet', 3)"></li>
+      <li class="bullet" onclick="rollButton('bullet', 4)"></li>
+    </ol>
+  </div>
+  <a id="prevBtn" class="prev" onclick="rollButton('prev')">❮</a>
+  <a id="nextBtn" class="next" onclick="rollButton('next')">❯</a>
+
+  <!-- Delete Modal -->
+  <div id="delModal" class="modal-overlay-delete">
+    <div class="modal-content">
+      <p>Are you sure you want to delete this user?</p>
+      <p>このユーザ情報は削除しますか？</p>
+      <button type="button" id="cancelDelete">Cancel</button>
+      <button type="button" id="confirmDelete">Delete</button>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal-overlay-edit">
+    <div class="edit-modal-content">
+      <button type="button" id="closeEdit">X</button>
+      <div id="editFormContainer">
+        <form onsubmit="addUserInfo('edit')">
+          <div class="col">
+            <div>
+              <label for="name">Name:</label>
+              <input type="text" id="name-edit" name="name" minlength="0" maxlength="20" placeholder="Enter your name"
+                oninput="errorMessage(this)" required />
+              <div id="error-message-name-edit"></div>
+            </div>
+
+            <div>
+              <label for="occupation">Occupation:</label>
+              <input type="text" id="occupation-edit" name="occupation" minlength="0" maxlength="40"
+                placeholder="Enter your position" oninput="errorMessage(this)" required />
+              <div id="error-message-occupation-edit"></div>
+            </div>
+
+            <div>
+              <label for="interest">Interest:</label>
+              <input type="text" id="interest-edit" name="interest" minlength="0" maxlength="30"
+                placeholder="Enter your interest" oninput="errorMessage(this)" required />
+              <div id="error-message-interest-edit"></div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div>
+              <label for="sex">Sex:</label>
+              <select name="sex" id="sex-edit">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="phone">Phone:</label>
+              <input type="tel" id="phone-edit" name="phone" minlength="9" maxlength="20" placeholder="09xxxxxxxxxx"
+                oninput="errorMessage(this)" required />
+              <div id="error-message-phone-edit"></div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div>
+              <label for="birthday">Birthday:</label>
+              <input type="date" id="birthday-edit" name="birthday" oninput="validateDate(this)" required />
+              <div id="error-message-birthday-edit"></div>
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email-edit" name="email" minlength="5" maxlength="50" placeholder="email@mail.com"
+                oninput="errorMessage(this)" required />
+              <div id="error-message-email-edit"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button type="submit" id="saveEditBtn">Edit</button>
+    </div>
+  </div>
+
+  <!-- User List Table -->
+  <div class="flexContainer">
+    <div class="myPageTable">
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Birthday</th>
+            <th>Occupation</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Interest</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- List userInfo Data -->
+        </tbody>
+      </table>
+      <p id="noData">No Data to Show</p>
+    </div>
+
+    <div class="addFormContainer">
+      <form onsubmit="addUserInfo()">
+        <div class="col">
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" minlength="0" maxlength="20" placeholder="Enter your name"
+              oninput="errorMessage(this)" required />
+            <div id="error-message-name"></div>
+          </div>
+
+          <div>
+            <label for="occupation">Occupation:</label>
+            <input type="text" id="occupation" name="occupation" minlength="0" maxlength="40"
+              placeholder="Enter your position" oninput="errorMessage(this)" required />
+            <div id="error-message-occupation"></div>
+          </div>
+
+          <div>
+            <label for="interest">Interest:</label>
+            <input type="text" id="interest" name="interest" minlength="0" maxlength="30"
+              placeholder="Enter your interest" oninput="errorMessage(this)" required />
+            <div id="error-message-interest"></div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div>
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex">
+              <option value="male" selected>Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" minlength="9" maxlength="20" placeholder="09xxxxxxxxxx"
+              oninput="errorMessage(this)" required />
+            <div id="error-message-phone"></div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div>
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" onkeypress="validateDate(this)"
+              oninput="validateDate(this)" required />
+            <div id="error-message-birthday"></div>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" minlength="5" maxlength="50" placeholder="email@mail.com"
+              oninput="errorMessage(this)" required />
+            <div id="error-message-email"></div>
+            <button id="addButton" type="submit">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="myPageVideo">
+      <video id="myPageVideo" width="400" controls autoplay muted loop>
+        <source src="./resources/video/squirrel_on_a_wood.mp4" type="video/mp4" />
+      </video>
+      <div class="video-time-control">
+        <button id="replayButton" type="button" value="replay" onclick="replayForwardButton(value)">
+          &#10226;<sup>10s</sup>
+        </button>
+        <button id="forwardButton" type="button" value="forward" onclick="replayForwardButton(value)">
+          <sup>10s</sup>&#10227;
+        </button>
+      </div>
+    </div>
+    <button type="button" id="playButton" onclick="playPauseButton()">
+      Pause
+    </button>
+  </div>
+  <footer>
+    <p></p>
+  </footer>
+
+  <script type="text/javascript" src="./script.js"></script>
+</body>
+
+</html>
